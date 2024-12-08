@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EXAMPLE PAGE</title>
+</head>
+<body>
+
+<h1>SEPTIC TANK SERVER</h1>
+
+<p>Amount of Methane: <span id="methane"> </span></p>
+<p>Water Level: <span id="water_level"> </span></p>
+<p>Temperature: <span id="temperature"> </span></p>
+<p>Turbidity: <span id="turbidity"> </span></p>
+
+<script>
+// Function to fetch data from the server
+async function fetchData() {
+    try {
+        const response = await fetch('http://your-server-url/api/data'); // Replace with your server URL
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        
+        // Update the HTML elements with the fetched data
+        document.getElementById("methane").textContent = data.methane;
+        document.getElementById("water_level").textContent = data.waterLevel;
+        document.getElementById("temperature").textContent = data.temperature;
+        document.getElementById("turbidity").textContent = data.turbidity;
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+// Call the fetchData function when the page loads
+window.onload = fetchData;
+</script>
+
+</body>
+</html>

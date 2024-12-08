@@ -1,0 +1,1 @@
+// takes data from sql database, converts it to JSON object which is sent to html
