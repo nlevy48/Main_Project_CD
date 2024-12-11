@@ -1,9 +1,29 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+// Replace with your network credentials
+const char* ssid = "S2J8K";
+const char* password = "ouch89tyre77met";
+
+// Replace with your server's IP address and PHP script path
+const char* serverName = "http://192.168.1.100/get_sensor_data.php";
+
 void setup() {
   // Initialize serial communication at 9600 bits per second
   Serial.begin(9600);
 
+  // Connect to Wi-Fi network
+  WiFi.begin(ssid, password);
+
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+
+  Serial.println("Connected to WiFi");
+
   // Seed the random number generator with an analog input
-  // This helps to ensure that the random numbers are more random
   randomSeed(analogRead(0));
 }
 
@@ -14,5 +34,38 @@ void loop() {
   // Print the random number to the serial monitor
   Serial.println(randomNumber);
 
+  // Check WiFi connection status
+  if (WiFi.status() == WL_CONNECTED) {
+    HTTPClient http;
+
+    // Specify the URL
+    http.begin(serverName);
+
+    // Specify content-type header
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // Prepare the data to be sent
+    String httpRequestData = "randomNumber=" + String(randomNumber);
+
+    // Send HTTP POST request
+    int httpResponseCode = http.POST(httpRequestData);
+
+    // Print response
+    if (httpResponseCode > 0) {
+      String response = http.getString();
+      Serial.println(httpResponseCode);
+      Serial.println(response);
+    } else {
+      Serial.print("Error on sending POST: ");
+      Serial.println(httpResponseCode);
+    }
+
+    // End the HTTP connection
+    http.end();
+  } else {
+    Serial.println("WiFi Disconnected");
+  }
+
   // Wait for 1 second before generating the next number
   delay(1000);
+}
