@@ -1,0 +1,2 @@
+add graphs
+gpt component to give advice to user

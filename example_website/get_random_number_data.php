@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sensor_database";
+$username = "noahlevy";
+$password = "angus999";
+$dbname = "RandomNumberDatabase";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,23 +12,31 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get data from POST request
-$randomNumber = $_POST['randomNumber'];
+// Check if randomNumber is set and is a valid integer
+if (isset($_POST['randomNumber']) && filter_var($_POST['randomNumber'], FILTER_VALIDATE_INT) !== false) {
+    $randomNumber = $_POST['randomNumber'];
 
-// Prepare and bind
-$stmt = $conn->prepare("INSERT INTO sensor_data (SensorID, SensorName, SensorValue) VALUES (?, ?, ?)");
-$sensorID = 1; // Example sensor ID
-$sensorName = "Random Number Generator"; // Example sensor name
-$stmt->bind_param("isd", $sensorID, $sensorName, $randomNumber);
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO RandomNumbers (value) VALUES (?);");
+    if ($stmt) {
+        $stmt->bind_param("i", $randomNumber);
 
-// Execute the statement
-if ($stmt->execute()) {
-    echo "New record created successfully";
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        // Close the statement
+        $stmt->close();
+    } else {
+        echo "Error: " . $conn->error;
+    }
 } else {
-    echo "Error: " . $stmt->error;
+    echo "Invalid input";
 }
 
-// Close the statement and connection
-$stmt->close();
+// Close the connection
 $conn->close();
 ?>
