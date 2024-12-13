@@ -2,11 +2,11 @@
 #include <HTTPClient.h>
 
 // Replace with your network credentials
-const char* ssid = "FriendsNet";
-const char* password = "ja29jdnasl92882";
+const char* ssid = "S2J8K";
+const char* password = "ouch89tyre77met";
 
 // Replace with your server's IP address and PHP script path
-const char* serverName = "http://qat-pi-3/get_random_number_data.php";
+const char* serverName = "http://qat-pi-3/var/html/www/get_random_number_data.php";
 
 void setup() {
   // Initialize serial communication at 9600 bits per second

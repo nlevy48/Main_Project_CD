@@ -9,14 +9,11 @@ The code also establishes a routine for a digital output. When digital output is
 /* This code was adapted from https://microcontrollerslab.com/mq4-methane-gas-sensor-pinout-interfacing-with-arduino-features/ */
 
 const int AO_Pin=0; // Connect the AO of MQ-4 sensor with analog channel 0 pin (A0) of Arduino
-const int DO_Pin=8; // Connect the DO of MQ-4 sensor with digital pin 8 (D8) of Arduino
-int threshold; // Create a variable to store the digital output of the MQ-4 sensor
 int AO_Out; // Create a variable to store the analog output of the MQ-4 sensor
 
 // Set up
 void setup() {
 Serial.begin(115200);  // Initialize serial monitor using a baud rate of 115200
-pinMode(DO_Pin, INPUT); // Set the D8 pin as a digital input pin
 }
 
 // Main loop
