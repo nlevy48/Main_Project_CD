@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Number Display</title>
+</head>
+<body>
+
+<h1 id="heading">Random Number Server</h1>
+
+<p>Random Number: <span id="random_number"> </span></p>
+
+<button onclick="updateHeading()">Update Heading</button>
+
+<script>
+
+console.log("Script loaded");
+
+// Function to fetch data from the server
+async function fetchRandomNumber() {
+    try {
+        console.log("Fetching data from the server");
+        const response = await fetch('get_random_number_data.php'); // Replace with your server URL
+        console.log(response);
+        if (!response.ok) {
+            console.log(response.statusText);
+            throw new Error('Network response was not ok ' + response.statusText);
+
+        }
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        
+        // Update the HTML element with the fetched data
+        document.getElementById("random_number").textContent = data.random_number; // Changed to match the expected JSON key
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+// Function to update the heading
+function updateHeading() {
+    document.getElementById('heading').textContent = "Noah Levy";
+}
+
+// Call the fetchRandomNumber function when the page loads
+window.onload = fetchRandomNumber;
+setInterval(fetchRandomNumber, 1000);
+</script>
+
+</body>
+</html>
