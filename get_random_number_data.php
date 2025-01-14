@@ -44,6 +44,7 @@ if (isset($_POST['randomNumber']) && filter_var($_POST['randomNumber'], FILTER_V
 } else {
     http_response_code(400);
     echo json_encode(["error" => "Invalid input"]);
+    echo json_encode(["stmt" => $stmt]);
 }
 
 $conn->close();
