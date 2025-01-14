@@ -1,52 +1,52 @@
 <?php
-echo json_encode(["random_number" => rand(0, 100)]);
-// header("Access-Control-Allow-Origin: *");
-// header("Content-Type: application/json");
 
-// $servername = "localhost";
-// $username = "noahlevy";
-// $password = "angus999";
-// $dbname = "RandomNumberDatabase";
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
-// // Create connection
-// $conn = new mysqli($servername, $username, $password, $dbname);
+$servername = "localhost";
+$username = "noahlevy";
+$password = "angus999";
+$dbname = "RandomNumberDatabase";
 
-// // Check connection
-// if ($conn->connect_error) {
-//     http_response_code(500);
-//     echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
-//     exit();
-// }
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// // Check if randomNumber is set and is a valid integer
-// if (isset($_POST['randomNumber']) && filter_var($_POST['randomNumber'], FILTER_VALIDATE_INT) !== false) {
-//     $randomNumber = $_POST['randomNumber'];
+// Check connection
+if ($conn->connect_error) {
+    http_response_code(500);
+    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
+    exit();
+}
 
-//     // Prepare and bind
-//     $stmt = $conn->prepare("INSERT INTO RandomNumbers (value) VALUES (?);");
-//     if ($stmt) {
-//         $stmt->bind_param("i", $randomNumber);
+// Check if randomNumber is set and is a valid integer
+if (isset($_POST['randomNumber']) && filter_var($_POST['randomNumber'], FILTER_VALIDATE_INT) !== false) {
+    $randomNumber = $_POST['randomNumber'];
 
-//         // Execute the statement
-//         if ($stmt->execute()) {
-//             echo json_encode(["success" => "New record created successfully"]);
-//         } else {
-//             http_response_code(400);
-//             echo json_encode(["error" => "Error: " . $stmt->error]);
-//         }
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO RandomNumbers (value) VALUES (?);");
+    if ($stmt) {
+        $stmt->bind_param("i", $randomNumber);
 
-//         // Close the statement
-//         $stmt->close();
-//     } else {
-//         http_response_code(400);
-//         echo json_encode(["error" => "Error: " . $conn->error]);
-//     }
-// } else {
-//     http_response_code(400);
-//     echo json_encode(["error" => "Invalid input"]);
-// }
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo json_encode(["success" => "New record created successfully"]);
+        } else {
+            http_response_code(400);
+            echo json_encode(["error" => "Error: " . $stmt->error]);
+        }
 
-// $conn->close();
+        // Close the statement
+        $stmt->close();
+    } else {
+        http_response_code(400);
+        echo json_encode(["error" => "Error: " . $conn->error]);
+    }
+} else {
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid input"]);
+}
+
+$conn->close();
 
 
 ?>
