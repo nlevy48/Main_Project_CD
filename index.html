@@ -19,7 +19,7 @@ console.log("Script loaded");
 async function fetchRandomNumber() {
     try {
         console.log("Fetching data from the server");
-        const response = await fetch('get_random_number_data.php'); // Replace with your server URL
+        const response = await fetch('send_random_number_data.php'); // Replace with your server URL
         console.log(response);
         if (!response.ok) {
             console.log(response.statusText);

@@ -1,4 +1,5 @@
 <?php
+// Program sends data from sql database to the html server
 // Database connection parameters
 $servername = "localhost";
 $username = "noahlevy";
