@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 // Program acquires data from raspberry pi and sends it to sql database
 
 $servername = "localhost";
@@ -42,7 +45,6 @@ if (isset($_POST['randomNumber']) && filter_var($_POST['randomNumber'], FILTER_V
 } else {
     http_response_code(400);
     echo json_encode(["error" => "Invalid input"]);
-    
 }
 
 $conn->close();
