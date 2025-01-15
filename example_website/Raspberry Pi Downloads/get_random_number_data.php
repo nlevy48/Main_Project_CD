@@ -1,7 +1,6 @@
 <?php
 // echo json_encode(["random_number" => rand(0, 100)]);
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
 
 $servername = "localhost";
 $username = "noahlevy";

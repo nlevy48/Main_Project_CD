@@ -6,7 +6,7 @@ const char* ssid = "FriendsNet";
 const char* password = "ja29jdnasl92882";
 
 // Replace with your server's IP address and PHP script path
-const char* serverName = "http://qat-pi-3/get_random_number_data.php";
+const char* serverName = "http://qat-pi-3.friendsbalt.org/get_random_number_data.php";
 
 void setup() {
   // Initialize serial communication at 9600 bits per second
