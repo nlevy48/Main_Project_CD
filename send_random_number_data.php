@@ -28,4 +28,9 @@ if ($result->num_rows > 0) {
 }
 
 json_encode($json);
+if ($conn->connect_error) {
+    echo json_encode(["json" => "Error: " . $conn->connect_error]);
+} else {
+    echo json_encode($json);
+}
 ?>
