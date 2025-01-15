@@ -31,7 +31,7 @@ async function fetchRandomNumber() {
         console.log(data);
         
         // Update the HTML element with the fetched data
-        document.getElementById("value").textContent = data.random_number; // Changed to match the expected JSON key
+        document.getElementById("random_number").textContent = data.random_number; // Changed to match the expected JSON key
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }

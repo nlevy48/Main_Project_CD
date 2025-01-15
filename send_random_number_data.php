@@ -20,14 +20,12 @@ $result = $conn->query($sql);
 
 $conn->close();
 
-$json = array();
+$json = array("random_number" => null);
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $json[] = $row;
-    }
+    $row = $result->fetch_assoc();
+    $json["random_number"] = $row["value"];
 }
 
-json_encode($json);
 if ($conn->connect_error) {
     echo json_encode(["json" => "Error: " . $conn->connect_error]);
 } else {
