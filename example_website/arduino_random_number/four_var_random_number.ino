@@ -32,6 +32,7 @@ void loop() {
   long methane_sensor = random(1, 1000001);
   long water_level_sensor = random(1, 1000001);
   long turbidity_sensor = random(1, 1000001);
+  long temperature_sensor = random(1, 1000001);
 
   // Print the sensor values to the serial monitor
   Serial.print("Methane Sensor: ");
@@ -40,6 +41,8 @@ void loop() {
   Serial.println(water_level_sensor);
   Serial.print("Turbidity Sensor: ");
   Serial.println(turbidity_sensor);
+  serial.print("Temperature Sensor: ");
+  serial.println(temperature_sensor);
 
   // Check WiFi connection status
   if (WiFi.status() == WL_CONNECTED) {
@@ -54,7 +57,9 @@ void loop() {
     // Prepare the data to be sent
     String httpRequestData = "methane_sensor=" + String(methane_sensor) +
                              "&water_level_sensor=" + String(water_level_sensor) +
-                             "&turbidity_sensor=" + String(turbidity_sensor);
+                             "&turbidity_sensor=" + String(turbidity_sensor) +
+                             "&temperature_sensor=" + String(temperature_sensor);
+
 
     // Send HTTP POST request
     int httpResponseCode = http.POST(httpRequestData);
