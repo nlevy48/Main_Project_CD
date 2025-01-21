@@ -21,7 +21,7 @@ $databases = ["Methane_Level", "Temperature", "Turbidity", "Water_Level"];
 $values = ["methane_value", "temperature_value", "turbidity_value", "water_level_value"];
 
 foreach ($databases as $index => $database) {
-    $sql = "SELECT id, $values[$index] FROM  $database";
+    $sql = "SELECT id, $values[$index] FROM $database ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -33,8 +33,10 @@ foreach ($databases as $index => $database) {
     }
 }
 
-$conn->close();
-
 // Encode data as JSON
 echo json_encode($data);
+
+$conn->close();
+
+
 ?>
