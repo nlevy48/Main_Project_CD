@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Random Number Display</title>
+<title>EXAMPLE PAGE</title>
 </head>
 <body>
 
-<h1 id="heading">Random Number Server</h1>
+<h1>SEPTIC TANK SERVER</h1>
 
-<p>Random Number: <span id="random_number"> </span></p>
-
-<button onclick="updateHeading()">Update Heading</button>
+<p>Amount of Methane: <span id="methane"> </span></p>
+<p>Water Level: <span id="water_level"> </span></p>
+<p>Temperature: <span id="temperature"> </span></p>
+<p>Turbidity: <span id="turbidity"> </span></p>
 
 <script>
-
-console.log("Script loaded");
-
 // Function to fetch data from the server
-async function fetchRandomNumber() {
+async function fetchData() {
     try {
-        console.log("Fetching data from the server");
-        const response = await fetch('send_random_number_data.php'); // Replace with your server URL
-        console.log(response);
+        const response = await fetch('send_sensor_data.php'); // Replace with your server URL
         if (!response.ok) {
-            console.log(response.statusText);
             throw new Error('Network response was not ok ' + response.statusText);
-
         }
-        console.log(response);
         const data = await response.json();
-        console.log(data);
         
-        // Update the HTML element with the fetched data
-        document.getElementById("random_number").textContent = data.random_number; // Changed to match the expected JSON key
+        // Update the HTML elements with the fetched data
+        document.getElementById("methane").textContent = data.methane;
+        document.getElementById("water_level").textContent = data.waterLevel;
+        document.getElementById("temperature").textContent = data.temperature;
+        document.getElementById("turbidity").textContent = data.turbidity;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
 }
 
-// Function to update the heading
-function updateHeading() {
-    document.getElementById('heading').textContent = "Noah Levy";
-}
-
-// Call the fetchRandomNumber function when the page loads
-window.onload = fetchRandomNumber;
-setInterval(fetchRandomNumber, 100);
+// Call the fetchData function when the page loads
+window.onload = fetchData;
 </script>
 
 </body>
