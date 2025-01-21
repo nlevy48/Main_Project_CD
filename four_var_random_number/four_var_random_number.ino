@@ -6,7 +6,7 @@ const char* ssid = "FriendsNet";
 const char* password = "ja29jdnasl92882";
 
 // Replace with your server's IP address and PHP script path
-const char* serverName = "http://qat-pi-3.friendsbalt.org/get_random_number_data.php";
+const char* serverName = "http://qat-pi-3.friendsbalt.org/get_sensor_data.php";
 
 void setup() {
   // Initialize serial communication at 9600 bits per second
@@ -41,8 +41,8 @@ void loop() {
   Serial.println(water_level_sensor);
   Serial.print("Turbidity Sensor: ");
   Serial.println(turbidity_sensor);
-  serial.print("Temperature Sensor: ");
-  serial.println(temperature_sensor);
+  Serial.print("Temperature Sensor: ");
+  Serial.println(temperature_sensor);
 
   // Check WiFi connection status
   if (WiFi.status() == WL_CONNECTED) {
@@ -59,7 +59,6 @@ void loop() {
                              "&water_level_sensor=" + String(water_level_sensor) +
                              "&turbidity_sensor=" + String(turbidity_sensor) +
                              "&temperature_sensor=" + String(temperature_sensor);
-
 
     // Send HTTP POST request
     int httpResponseCode = http.POST(httpRequestData);
