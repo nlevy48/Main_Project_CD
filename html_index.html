@@ -16,7 +16,7 @@
 // Function to fetch data from the server
 async function fetchData() {
     try {
-        const response = await fetch('http://your-server-url/api/data'); // Replace with your server URL
+        const response = await fetch('send_sensor_data.php'); // Replace with your server URL
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
