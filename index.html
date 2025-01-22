@@ -27,10 +27,14 @@ async function fetchData() {
         console.log(data);
         
         // Update the HTML elements with the fetched data
-        document.getElementById("methane").textContent = data.methane_value;
-        document.getElementById("water_level").textContent = data.water_level_value;
-        document.getElementById("temperature").textContent = data.temperature_value;
-        document.getElementById("turbidity").textContent = data.turbidity_value;
+        try {
+            document.getElementById("methane").textContent = data.Methane_Level[0].methane_value;
+            document.getElementById("water_level").textContent = data.Water_Level[0].water_level_value;
+            document.getElementById("temperature").textContent = data.Temperature[0].temperature_value;
+            document.getElementById("turbidity").textContent = data.Turbidity[0].turbidity_value;
+        } catch (error) {
+            console.error("Error updating values:", error);
+        }
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
