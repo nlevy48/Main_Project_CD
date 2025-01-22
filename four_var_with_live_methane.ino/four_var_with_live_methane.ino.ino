@@ -8,6 +8,11 @@ const char* password = "ja29jdnasl92882";
 // Replace with your server's IP address and PHP script path
 const char* serverName = "http://qat-pi-3.friendsbalt.org/get_sensor_data.php";
 
+//Methane Sensor Information
+
+const int AO_Pin=0; // Connect the AO of MQ-4 sensor with analog channel 0 pin (A0) of Arduino
+int methane_sensor; // Create a variable to store the analog output of the MQ-4 sensor
+
 void setup() {
   // Initialize serial communication at 9600 bits per second
   Serial.begin(9600);
@@ -29,14 +34,18 @@ void setup() {
 
 void loop() {
   // Generate random numbers for the sensors
-  long methane_sensor = random(1, 1000001);
+ 
   long water_level_sensor = random(1, 1000001);
   long turbidity_sensor = random(1, 1000001);
   long temperature_sensor = random(1, 1000001);
+  methane_sensor = analogRead(AO_Pin); // Read the analog output measurement sample from the MQ4 sensor's AO pin
+  
+  Serial.print("Methane Conentration: "); // Print out the text "Methane Concentration: "
+  Serial.println(methane_sensor); // Print out the methane value - the analog output - beteewn 0 and 1023
 
   // Print the sensor values to the serial monitor
-  Serial.print("Methane Sensor: ");
-  Serial.println(methane_sensor);
+  Serial.print("Methane Conentration: "); // Print out the text "Methane Concentration: "
+  Serial.println(methane_sensor); // Print out the methane value - the analog output - beteewn 0 and 1023
   Serial.print("Water Level Sensor: ");
   Serial.println(water_level_sensor);
   Serial.print("Turbidity Sensor: ");
