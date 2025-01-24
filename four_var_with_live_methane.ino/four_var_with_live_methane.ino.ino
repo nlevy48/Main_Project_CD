@@ -10,7 +10,7 @@ const char* serverName = "http://qat-pi-3.friendsbalt.org/get_sensor_data.php";
 
 //Methane Sensor Information
 
-const int AO_Pin=0; // Connect the AO of MQ-4 sensor with analog channel 0 pin (A0) of Arduino
+const int AO_Pin = 34; // Connect the AO of MQ-4 sensor with GPIO 34 of ESP32
 int methane_sensor; // Create a variable to store the analog output of the MQ-4 sensor
 
 void setup() {
