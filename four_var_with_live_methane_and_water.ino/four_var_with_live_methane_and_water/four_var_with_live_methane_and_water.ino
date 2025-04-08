@@ -14,12 +14,13 @@ const int AO_Pin = 34; // Connect the AO of MQ-4 sensor with GPIO 34 of ESP32
 int methane_sensor; // Create a variable to store the analog output of the MQ-4 sensor
 const int DO_Pin = 35; // Connect the DO of Water sensor with GPIO 35 of ESP32
 int water_sensor; // Create a variable to store the digital output of the Water sensor
-pinMode(DO_Pin, INPUT); // Set the DO pin as input
-pinMode(AO_Pin, INPUT); // Set the AO pin as input
 void setup() {
   // Initialize serial communication at 9600 bits per second
   Serial.begin(9600);
 
+  // Set the pin modes
+  pinMode(DO_Pin, INPUT); // Set the DO pin as input
+  pinMode(AO_Pin, INPUT); // Set the AO pin as input
   // Connect to Wi-Fi network
   WiFi.begin(ssid, password);
 
