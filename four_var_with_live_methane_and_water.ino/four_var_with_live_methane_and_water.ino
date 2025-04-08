@@ -14,7 +14,8 @@ const int AO_Pin = 34; // Connect the AO of MQ-4 sensor with GPIO 34 of ESP32
 int methane_sensor; // Create a variable to store the analog output of the MQ-4 sensor
 const int DO_Pin = 35; // Connect the DO of Water sensor with GPIO 35 of ESP32
 int water_sensor; // Create a variable to store the digital output of the Water sensor
-
+pinMode(DO_Pin, INPUT); // Set the DO pin as input
+pinMode(AO_Pin, INPUT); // Set the AO pin as input
 void setup() {
   // Initialize serial communication at 9600 bits per second
   Serial.begin(9600);
@@ -40,7 +41,7 @@ void loop() {
   long turbidity_sensor = random(1, 1000001);
   long temperature_sensor = random(1, 1000001);
   methane_sensor = analogRead(AO_Pin); // Read the analog output measurement sample from the MQ4 sensor's AO pin
-  water_sensor = digitalRead(DO_Pin); // Read the digital output measurement sample from the Water sensor's DO pin
+  water_sensor = (digitalRead(DO_Pin) == HIGH) ? 1 : 0; // Read the digital output measurement sample from the Water sensor's DO pin
   Serial.print("Water Level Sensor: ");
   Serial.println(water_sensor); // Print out the water level value - the digital output - between 0 and 1
   Serial.print("Methane Conentration: "); // Print out the text "Methane Concentration: "
@@ -50,7 +51,7 @@ void loop() {
   Serial.print("Methane Conentration: "); // Print out the text "Methane Concentration: "
   Serial.println(methane_sensor); // Print out the methane value - the analog output - between 0 and 1023
   Serial.print("Water Level Sensor: ");
-  Serial.println(water_level_sensor);
+  Serial.println(water_sensor);
   Serial.print("Turbidity Sensor: ");
   Serial.println(turbidity_sensor);
   Serial.print("Temperature Sensor: ");
